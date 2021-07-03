@@ -1,5 +1,5 @@
 ### Request 1
-POST http://localhost:5000/api/auth/register 
+POST http://localhost:3000/api/auth/register 
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Request 2
-POST http://localhost:5000/api/auth/login
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
@@ -25,9 +25,14 @@ Content-Type: application/json
 }
 
 ### Request 3
-POST http://localhost:5000/api/auth/forgotPassword
+POST http://localhost:3000/api/auth/forgotPassword
 Content-Type: application/json
 
 ### Request 4
-PUT http://localhost:5000/api/auth/resetPassword/123
+PUT http://localhost:3000/api/auth/resetPassword/123
 Content-Type: application/json
+
+
+### Request 5
+GET http://localhost:3000/api/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGZlMDMxODIwZDRiNDIzMGZjNzFlMiIsImlhdCI6MTYyNTMyMDk2MSwiZXhwIjoxNjI1MzIxNTYxfQ.2VsOfQZtB3OugjWGCVEJkbep1WbrZ45JrxAkbyQkYKQ

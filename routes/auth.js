@@ -1,6 +1,7 @@
- const express = require('express');
+ import express from 'express';
+ import {register,login,forgotPassword,resetPassword} from '../controllers/auth' ;
+ 
  const router = express.Router();
- const {register,login,forgotPassword,resetPassword} = require('../controllers/auth');
 
  router.post("/register",register);
  router.post("/login",login);
@@ -8,4 +9,4 @@
  router.put("/resetPassword/:resetToken",resetPassword);
  
  
- module.exports = router;
+export default router;

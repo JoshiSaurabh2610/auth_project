@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const ErrorResponse = require('../utils/errorResponse');
-exports.register = async (req, res, next) => {
+import User from '../models/User';
+import ErrorResponse from '../utils/errorResponse';
+export const register = async (req, res, next) => {
     const { username, email, password } = req.body;
     try {
         const user = await User.create({
@@ -15,7 +15,7 @@ exports.register = async (req, res, next) => {
         return next(error);
     }
 }
-exports.login = async (req, res, next) => {
+export const login = async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
         // res.status(400).json({
@@ -57,10 +57,10 @@ exports.login = async (req, res, next) => {
         return next(err);
     }
 }
-exports.forgotPassword = (req, res, next) => {
+export const forgotPassword = (req, res, next) => {
     res.send("forgotPassword Route");
 }
-exports.resetPassword = (req, res, next) => {
+export const resetPassword = (req, res, next) => {
     res.send("resetPassword Route");
 }
 
