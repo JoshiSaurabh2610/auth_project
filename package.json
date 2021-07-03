@@ -1,0 +1,19 @@
+{
+  "name": "auth_project",
+  "version": "1.0.0",
+  "description": "Complete Authentication Project",
+  "main": "Server.js",
+  "scripts": {
+    "dev": "nodemon -r esm server.js",
+    "start": "node -r esm server.js"
+  },
+  "author": "Saurabh Joshi",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.0"
+  }
+}

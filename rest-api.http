@@ -1,0 +1,26 @@
+### Request 1
+POST http://localhost:5000/api/auth/register 
+Content-Type: application/json
+
+{
+    "username":"saurabhjoshi2610",
+    "email": "testuser@gmail.com",
+    "password": "1234567"
+}
+
+### Request 2
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "testuser@gmail.com",
+    "password": "1234567"
+}
+
+### Request 3
+POST http://localhost:5000/api/auth/forgotPassword
+Content-Type: application/json
+
+### Request 4
+PUT http://localhost:5000/api/auth/resetPassword/123
+Content-Type: application/json
