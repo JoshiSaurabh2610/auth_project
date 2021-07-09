@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -19,11 +20,11 @@ const UserSchema = new mongoose.Schema({
         select: false,
     },
     resetPasswordToken: String,
-    resetPaswordExpire: Date,
+    resetPasswordExpire: Date,
 });
 
 // we can run some middleware here for presaving and post saving the data
-UserSchema.pre("save", async function(next){
+UserSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
         next();
     }
@@ -32,16 +33,25 @@ UserSchema.pre("save", async function(next){
     next();
 })
 
-UserSchema.methods.matchPassword = async function (password){
+UserSchema.methods.matchPassword = async function (password) {
     // password is the user's input password at the time of login
     // this.password is the User password which is fetched and then funciton call on this user 
-    return await bcrypt.compare(password,this.password);
+    return await bcrypt.compare(password, this.password);
 }
 
-UserSchema.methods.getSignedtoken = function (){
-    return jwt.sign({id:this._id},process.env.JWT_SECRET,{
-        expiresIn:process.env.JWT_EXPIRE,
+UserSchema.methods.getSignedtoken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE,
     })
+}
+
+UserSchema.methods.getResetToken = function () {
+    const resetToken = crypto.randomBytes(20).toString('hex');
+
+    this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+    this.resetPasswordExpire = Date.now() + 10 * 1000 * 60;
+    // console.log(this.resetPasswordToken);
+    return resetToken;
 }
 
 const UserModel = mongoose.model("users", UserSchema);

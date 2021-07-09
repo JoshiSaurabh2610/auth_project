@@ -7,7 +7,7 @@ export const Protect = async (req, res, next) => {
     console.log(req.headers);
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         //Bearer <JWT>
-        // console.log('trying to get token');
+        console.log('trying to get token');
         token = req.headers.authorization.split(" ")[1]
     }
     if (!token) {

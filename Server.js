@@ -1,5 +1,5 @@
 import express from 'express';
-
+import cors from 'cors'
 // Method -1
 require('dotenv').config({ path: "./config.env" });
 const APP_PORT = process.env.APP_PORT;
@@ -13,7 +13,7 @@ import PrivateRouter from './routes/private';
 import AuthRouter from './routes/auth';
 const app = express();
 connectDB();
-
+app.use(cors())
 app.use(express.json());
 
 app.use('/api/auth', AuthRouter);

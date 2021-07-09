@@ -1,7 +1,14 @@
 ### Request 1
-POST http://localhost:3000/api/auth/register 
+POST http://localhost:5000/api/auth/register 
 Content-Type: application/json
 
+{
+    "username": "saurabhRpvv",
+    "email": "saurabhjoshi.11rpvv@gmail.com",
+    "password": "joshiRpvv@1234"
+}
+
+### user 2
 {
     "username":"user@2",
     "email": "testuser2@gmail.com",
@@ -16,23 +23,51 @@ Content-Type: application/json
 }
 
 ### Request 2
-POST http://localhost:3000/api/auth/login
+POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
+{
+    "email": "saurabhjoshi.11rpvv@gmail.com",
+    "password": "joshiRpvv@1234"
+}
+
+###
+{
+    "email": "saurabhj.ec18@nsut.ac.in",
+    "password": "Saurabh@26102000"
+}
+
+###
 {
     "email": "testuser@gmail.com",
     "password": "1234567"
 }
 
 ### Request 3
-POST http://localhost:3000/api/auth/forgotPassword
+POST http://localhost:5000/api/auth/forgotPassword
 Content-Type: application/json
 
+{
+    "email": "saurabhjoshi.11rpvv@gmail.com"
+}
+
+###
+{
+    "email": "saurabhj.ec18@nsut.ac.in"
+}
+
 ### Request 4
-PUT http://localhost:3000/api/auth/resetPassword/123
+PUT http://localhost:5000/api/auth/resetPassword/8a4049246b2c37760c3c88d632a30be7c74adb64
 Content-Type: application/json
+
+{
+    "password": "SaurabhRpvv@123"
+}
 
 
 ### Request 5
-GET http://localhost:3000/api/private
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGZlMDMxODIwZDRiNDIzMGZjNzFlMiIsImlhdCI6MTYyNTMyMDk2MSwiZXhwIjoxNjI1MzIxNTYxfQ.2VsOfQZtB3OugjWGCVEJkbep1WbrZ45JrxAkbyQkYKQ
+GET http://localhost:5000/api/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTQ2MDlhZWIyMzQwMTU0MGYyZDU2OSIsImlhdCI6MTYyNTU3OTcxNCwiZXhwIjoxNjI1NTgwMzE0fQ.8jfiMCL6P_IfvsMP8oFnSKuTuwPooFx0qeTLpK-5YSo
+
+
+pankajjimaharajji
