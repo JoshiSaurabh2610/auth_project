@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './Register.css'
+import './Register.css';
 
 const Register = ({ history }) => {
     const [username, setUsername] = useState("");
@@ -92,7 +92,7 @@ const Register = ({ history }) => {
                         onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
                 <button type="submit" className="btn btn-primary"> Register </button>
-                <span className="register__subtext">Already have an Account? <Link to="/login"> Login </Link></span>
+                <span className="register__subtext">Already have an Account? <Link to="/login" style={{color:"navy"}}> Login </Link></span>
             </form>
         </div>
     )

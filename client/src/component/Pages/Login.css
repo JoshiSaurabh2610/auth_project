@@ -10,7 +10,7 @@
     width: 380px;
     padding: 1.5rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    background: #fff;
+    background: #707d96;
   }
   
   .login__title {
@@ -19,12 +19,21 @@
   }
   
   .login__forgotpassword {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+    /* color: #6e3Dc8; */
+    color: #212c42;
   }
   
   .login__subtext {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     display: block;
     margin: 0.5rem 0;
+    color: #212c42;
   }
   
+  .GoogleBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }

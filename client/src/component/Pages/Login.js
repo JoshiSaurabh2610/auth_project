@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
 import './Login.css'
 
 const Login = ({ history }) => {
@@ -24,11 +25,11 @@ const Login = ({ history }) => {
             }
         }
         try {
-            
-            const {data} = await axios.post("http://localhost:5000/api/auth/login",{email,password},config);
+
+            const { data } = await axios.post("http://localhost:5000/api/auth/login", { email, password }, config);
             console.log("Data we get after login");
             console.log(data.token);
-            localStorage.setItem("authToken",data.token);
+            localStorage.setItem("authToken", data.token);
             console.log("token saved in localStorage")
             history.push("/");
         } catch (err) {
@@ -40,6 +41,29 @@ const Login = ({ history }) => {
 
     }
 
+    const responseGoogleHandler = async (googleData) => {
+        console.log(googleData);
+        console.log(googleData.profileObj);
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+
+        try {
+            const { data } = await axios.post("http://localhost:5000/api/auth/googleLogin", {
+                token: googleData.tokenId
+            }, config)
+            console.log(data);
+            localStorage.setItem("authToken", data.token);
+            history.push("/");
+        } catch (err) {
+            setError(err.response.data.error);
+            setTimeout(() => {
+                setError("");
+            }, 5000);
+        }
+    }
 
     return (
         <div className="login">
@@ -47,7 +71,7 @@ const Login = ({ history }) => {
                 <h3 className="login__title">Login</h3>
                 {error && <span className="error-message">{error}</span>}
                 <div className="form-group">
-                    <label htmlFor="name">Email: </label>
+                    <label htmlFor="name">Email : </label>
                     <input type="email"
                         required
                         id="name"
@@ -57,8 +81,8 @@ const Login = ({ history }) => {
                         onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="name">Password:
-                        <Link to="/forgotPassword" tabIndex={4} className="login__forgotpassword">Forgot Password</Link>
+                    <label htmlFor="name">Password :
+                        <Link to="/forgotPassword" tabIndex={4} className="login__forgotpassword">  Forgot Password</Link>
                     </label>
                     <input type="password"
                         required
@@ -69,6 +93,17 @@ const Login = ({ history }) => {
                         onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <button type="submit" className="btn btn-primary" tabIndex={3}> Login </button>
+                <div className="GoogleBtn">
+                    <GoogleLogin
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText="Login with Google"
+                        onSuccess={responseGoogleHandler}
+                        onFailure={responseGoogleHandler}
+                        cookiePolicy={'single_host_origin'}
+                        style={{ width: "100%" }}
+                    />
+                </div>
+
                 <span className="login__subtext">Don't have an Account? <Link to="/register"> Register </Link></span>
             </form>
         </div>

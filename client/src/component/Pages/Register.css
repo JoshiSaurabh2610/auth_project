@@ -10,7 +10,7 @@
     width: 380px;
     padding: 1.5rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    background: #fff;
+    background: #707d96;
   }
   
   .register__title {
@@ -22,5 +22,6 @@
     font-size: 0.7rem;
     display: block;
     margin: 0.5rem 0;
+    color: #212c42;
   }
   

@@ -2,14 +2,19 @@ import User from '../models/User';
 import ErrorResponse from '../utils/errorResponse';
 import mailjet from '../utils/MAILJET';
 import crypto from 'crypto';
+import {OAuth2Client} from 'google-auth-library'
 
 export const register = async (req, res, next) => {
     const { username, email, password } = req.body;
     try {
+        const user = await User.findOne({ email }).select("+password");
+        if (user) {
+            return next(new ErrorResponse("User Already Exists", 401));
+        }
         const user = await User.create({
             username, email, password,
         });
-        sendToken(user, 201, res);
+        sendToken(user, 201, res); 
     } catch (err) {
         // res.status(500).json({
         //     sucess: false,
@@ -60,6 +65,36 @@ export const login = async (req, res, next) => {
         // })
         return next(err);
     }
+}
+
+export const GoogleLoginHandler = async(req, res, next) =>{
+    const { token } = req.body;
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken:token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+
+        const {name,email,picture} = ticket.getPayload();
+        console.log(name,email,picture);
+        try {
+            const user = await User.create({
+                username:name, email,
+            });
+            return sendToken(user, 201, res);
+        } catch (err) {
+            // res.status(500).json({
+            //     sucess: false,
+            //     error: err.message,
+            // })
+            return next(err);
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({data: "idToken Invalide"});
+    }
+
 }
 
 export const forgotPassword = async (req, res, next) => {
@@ -142,5 +177,5 @@ export const resetPassword = async (req, res, next) => {
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedtoken();
-    res.status(statusCode).json({ sucess: true, token })
+    res.status(statusCode).json({ sucess: true,user, token })
 }
